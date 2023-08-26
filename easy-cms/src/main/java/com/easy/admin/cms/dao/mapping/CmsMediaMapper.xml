@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.easy.admin.cms.dao.CmsMediaMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.easy.admin.cms.model.CmsMedia">
+        <result column="id" property="id" />
+        <result column="site_id" property="siteId" />
+        <result column="name" property="name" />
+        <result column="type" property="type" />
+        <result column="status" property="status" />
+        <result column="version" property="version" />
+        <result column="create_user" property="createUser" />
+        <result column="create_date" property="createDate" />
+        <result column="edit_user" property="editUser" />
+        <result column="edit_date" property="editDate" />
+    </resultMap>
+    <select id="select" resultType="com.easy.admin.cms.model.CmsMedia">
+        select t.id, t.site_id, t.name, t.type, t.status, su_edit_user.nickname as edit_user, t.edit_date, sf.path as file_url
+        from cms_media t
+        left join sys_user su_edit_user on su_edit_user.id = t.edit_user
+        left join sys_file sf on sf.parent_id = t.id and sf.type = '${@com.easy.admin.cms.common.type.CmsFileType@MEDIA_FILE.code}'
+        <where>
+            ${ew.sqlSegment}
+        </where>
+    </select>
+
+    <select id="getById" resultType="com.easy.admin.cms.model.CmsMedia">
+        select t.id, t.site_id, t.name, t.type, t.status, t.version
+        from cms_media t
+        where t.id = #{id}
+    </select>
+
+</mapper>
