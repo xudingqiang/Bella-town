@@ -27,7 +27,6 @@
         <module>easy-sample</module>
         <module>easy-scheduler</module>
         <module>easy-sys</module>
-        <module>easy-cms</module>
     </modules>
 
     <properties>
@@ -107,11 +106,7 @@
                 <artifactId>easy-sys</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            <dependency>
-                <groupId>com.easy.admin</groupId>
-                <artifactId>easy-cms</artifactId>
-                <version>${project.version}</version>
-            </dependency>
+
             <dependency>
                 <groupId>com.easy.admin</groupId>
                 <artifactId>easy-elasticsearch</artifactId>
